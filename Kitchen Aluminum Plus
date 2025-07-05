@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Aluminum Plus+ by Marwan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        /* Hide number input arrows */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type="number"] { -moz-appearance: textfield; }
+
+        .styled-input, .main-table select, .styled-select {
+            padding: 10px 14px;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cbd5e1; /* slate-300 */
+            border-radius: 8px;
+            background-color: #ffffff;
+            transition: all 0.2s ease-in-out;
+            color: #1e293b; /* slate-800 */
+        }
+        .styled-input:focus, .main-table select:focus, .styled-select:focus {
+             border-color: #38bdf8; /* light-blue-400 */
+             box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+             outline: none;
+        }
+        .main-table td { padding: 5px; }
+
+        /* Custom Button Styles */
+        .btn { @apply font-bold py-2.5 px-5 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105; }
+        .btn-primary { @apply w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white; }
+        .btn-secondary { @apply bg-slate-600 hover:bg-slate-700 text-white; }
+        .btn-danger { @apply bg-red-600 hover:bg-red-700 text-white !w-auto; }
+        .btn-success { @apply bg-emerald-500 hover:bg-emerald-600 text-white; }
+        .btn-link { @apply text-blue-600 hover:text-blue-800 hover:underline font-semibold; }
+
+        .table-header { @apply py-3 px-3 text-center text-slate-100 text-sm font-semibold uppercase tracking-wider bg-slate-700; }
+
+        /* Modal Animation */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-20px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+        .modal-content { animation: slideIn 0.5s ease-out forwards; }
+        .modal-backdrop { animation: fadeIn 0.3s ease-out forwards; }
+    </style>
+</head>
+<body class="p-4 flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-md">
+        <!-- Login Section -->
+        <div id="login-section" class="bg-white p-8 rounded-xl shadow-2xl">
+            <div class="text-center mb-6">
+                <img src="https://placehold.co/300x150/007bff/ffffff?text=KA-PLUS" class="h-20 w-auto mx-auto mb-4" alt="شعار البرنامج">
+                <h1 class="text-3xl font-bold text-center text-slate-800 mb-2">Kitchen Aluminum Plus+</h1>
+                <p class="text-center text-slate-500 mb-6">تصميم وتطوير: مروان العشماوي</p>
+            </div>
+            <div id="login-error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative hidden mb-4" role="alert"></div>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-slate-700 text-sm font-medium mb-1">اسم المستخدم:</label>
+                    <input type="text" id="username" class="styled-input" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-slate-700 text-sm font-medium mb-1">كلمة المرور:</label>
+                    <input type="password" id="password" class="styled-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary !mt-6">دخــول</button>
+            </form>
+            <div class="text-center mt-6">
+                 <button id="show-register-btn" class="btn-link">ليس لديك حساب؟ أنشئ حسابًا جديدًا</button>
+            </div>
+        </div>
+
+        <!-- Registration Section -->
+        <div id="register-section" class="bg-white p-8 rounded-xl shadow-2xl hidden">
+             <h2 class="text-2xl font-bold text-center text-slate-800 mb-4">إنشاء حساب وتفعيل</h2>
+             <p class="text-center text-slate-600 mb-4">للحصول على كود التفعيل، يرجى التواصل معنا بعد تحويل قيمة الباقة المناسبة على الرقم التالي (فودافون كاش):</p>
+             <p class="text-center text-2xl font-bold text-emerald-600 mb-6 ltr">+201551070504</p>
+             
+             <div class="space-y-3 text-center text-slate-700 bg-slate-50 p-4 rounded-lg border border-slate-200 mb-6">
+                <p><span class="font-bold">تجريبي (يوم واحد):</span>(مجانا لكن بجب التحدث للمطور مروان العشماوي واتساب للتجربه المجانيه)  <span class="font-mono text-fuchsia-600"></span></p>
+                <p><span class="font-bold">الباقة الفضية (6 أشهر):</span>(500جنيه مصري)  <span class="font-mono text-cyan-600"></span></p>
+                <p><span class="font-bold">الباقة الذهبية (1 سنة):</span>(1000جنيه مصري)  <span class="font-mono text-amber-600"></span></p>
+                <p><span class="font-bold">الباقة الماسية (2.5 سنة):</span>(2500جنيه مصري)  <span class="font-mono text-violet-600"></span></p>
+                <p><span class="font-bold">الباقة الدائمة:</span> (5000جنيه) <span class="font-mono text-rose-600"></span></p>
+             </div>
+             
+             <div id="register-message" class="px-4 py-3 rounded-lg relative hidden mb-4" role="alert"></div>
+
+             <form id="register-form" class="space-y-4">
+                 <div>
+                    <label for="new-username" class="block text-slate-700 text-sm font-medium mb-1">اختر اسم مستخدم جديد:</label>
+                    <input type="text" id="new-username" class="styled-input" required>
+                </div>
+                <div>
+                    <label for="new-password" class="block text-slate-700 text-sm font-medium mb-1">اختر كلمة مرور:</label>
+                    <input type="password" id="new-password" class="styled-input" required>
+                </div>
+                 <div>
+                    <label for="activation-code" class="block text-slate-700 text-sm font-medium mb-1">أدخل كود التفعيل:</label>
+                    <input type="text" id="activation-code" class="styled-input uppercase" required>
+                </div>
+                <button type="submit" class="btn btn-success !mt-6">إنشاء الحساب</button>
+            </form>
+
+             <div class="text-center mt-6">
+                <button id="back-to-login-btn" class="btn-link">العودة لتسجيل الدخول</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="welcome-modal" class="fixed inset-0 bg-black bg-opacity-70 items-center justify-center hidden z-50 modal-backdrop">
+        <div class="bg-white p-10 rounded-xl shadow-2xl w-full max-w-lg text-center modal-content">
+             <img src="https://placehold.co/300x150/007bff/ffffff?text=KA-PLUS" alt="شعار البرنامج" class="h-24 w-auto mx-auto mb-4">
+            <h1 id="welcome-user-message" class="text-3xl font-bold text-slate-800 mb-4"></h1>
+            <p class="text-slate-600 mb-8 text-lg">جاهزون لبدء حسابات مطبخ جديد!</p>
+            <button id="start-btn" class="btn btn-primary w-auto px-10">ابدأ الآن</button>
+            <h3 class="mt-6 text-slate-500 font-semibold">مطور البرنامج: مروان العشماوي</h3>
+        </div>
+    </div>
+    
+    <!-- Session Timeout Modal -->
+    <div id="session-timeout-modal" class="fixed inset-0 bg-black bg-opacity-70 items-center justify-center hidden z-50 modal-backdrop">
+        <div class="bg-white p-10 rounded-xl shadow-2xl w-full max-w-lg text-center modal-content">
+            <h2 class="text-2xl font-bold text-amber-600 mb-4">تحذير انتهاء الجلسة</h2>
+            <p class="text-slate-600 mb-8 text-lg">سيتم تسجيل خروجك تلقائيًا بعد دقيقة واحدة بسبب عدم النشاط. هل ترغب في البقاء؟</p>
+            <div class="flex justify-center gap-4">
+                <button id="logout-now-btn" class="btn btn-danger px-8">تسجيل الخروج الآن</button>
+                <button id="stay-logged-in-btn" class="btn btn-success px-8">البقاء</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="main-page" class="container mx-auto bg-white p-6 rounded-2xl shadow-2xl hidden w-full max-w-7xl">
+        <header class="flex justify-between items-center pb-4 border-b border-slate-200 mb-6 flex-wrap gap-4">
+            <div class="flex items-center gap-4">
+                <img src="https://placehold.co/300x150/007bff/ffffff?text=KA-PLUS" alt="شعار البرنامج" class="h-12">
+                <h1 class="text-2xl font-bold text-slate-800">Kitchen Aluminum Plus+</h1>
+            </div>
+            <!-- Subscription Timer -->
+            <div id="subscription-timer" class="text-sm font-semibold text-white bg-sky-600 px-4 py-2 rounded-lg shadow-md hidden order-first sm:order-none w-full sm:w-auto text-center"></div>
+            <button id="logout-btn" class="btn btn-danger">تسجيل الخروج</button>
+        </header>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+                <label for="client-name-input" class="block text-slate-700 text-base font-medium mb-2">اسم العميل:</label>
+                <input type="text" id="client-name-input" class="styled-input" placeholder="مثال: مشروع فيلا المهندس علي">
+            </div>
+            <div>
+                <label for="global-handle-thickness-input" class="block text-slate-700 text-base font-medium mb-2">سمك المقبض (يطبق على الكل):</label>
+                <input type="number" id="global-handle-thickness-input" min="0" value="0" class="styled-input text-center">
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-end gap-4 mb-6">
+            <button id="results-btn" class="btn btn-primary sm:w-auto">عرض النتائج</button>
+            <button id="calculate-rods-btn" class="btn btn-secondary sm:w-auto">حساب عدد الأعواد</button>
+        </div>
+        
+        <div class="overflow-x-auto">
+            <table id="main-table" class="main-table min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                <thead>
+                     <tr>
+                        <th class="table-header rounded-tr-lg">العرض</th>
+                        <th class="table-header">العمق</th>
+                        <th class="table-header">الطول</th>
+                        <th class="table-header">النوع</th>
+                        <th class="table-header">نوع الضرف</th>
+                        <th class="table-header">عدد الأرفف</th>
+                        <th class="table-header">ملاحظات (شكل البانو)</th>
+                        <th class="table-header rounded-tl-lg">حذف</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    </tbody>
+            </table>
+        </div>
+        
+        <button id="add-row-btn" class="mt-6 btn btn-primary w-full sm:w-auto">إضافة وحدة جديدة</button>
+        <div id="main-error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative hidden mt-4" role="alert"></div>
+
+    </div>
+
+    <div id="results-page" class="container mx-auto bg-white p-6 rounded-2xl shadow-2xl hidden w-full max-w-7xl">
+        <h1 id="results-title" class="text-3xl font-bold text-center text-slate-800 mb-8 border-b pb-4 border-slate-300">النتائج</h1>
+        
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+             <button id="back-btn" class="btn btn-secondary w-full sm:w-auto">العودة</button>
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <button id="export-fiber-csv-btn" class="btn btn-success w-full sm:w-auto">تصدير الفيبر (Excel)</button>
+                <button id="save-results-btn" class="btn btn-primary w-full sm:w-auto">حفظ النتائج (HTML)</button>
+            </div>
+        </div>
+         
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+                <h2 class="text-2xl font-semibold text-center text-blue-800 mb-4">مقاسات الألمونيوم</h2>
+                <div class="overflow-x-auto">
+                    <table id="aluminum-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                         <thead class="bg-slate-200">
+                            <tr>
+                                <th class="table-header rounded-tr-lg">المقاس</th>
+                                <th class="table-header">مفرد</th>
+                                <th class="table-header rounded-tl-lg">متقارب</th>
+                            </tr>
+                        </thead>
+                         <tbody class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-2xl font-semibold text-center text-blue-800 mb-4">الضرف</h2>
+                <div class="overflow-x-auto">
+                    <table id="doors-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                        <thead class="bg-slate-200">
+                             <tr>
+                                <th class="table-header rounded-tr-lg">العرض</th>
+                                <th class="table-header">الطول</th>
+                                <th class="table-header">العدد</th>
+                                <th class="table-header rounded-tl-lg">ملاحظات</th>
+                            </tr>
+                        </thead>
+                         <tbody class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold text-center text-blue-800 mb-4 mt-8">تفاصيل الفيبر</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+             <div>
+                <h3 class="text-xl font-semibold text-center text-slate-700 mb-3">فيبر البانوهات (جسم الوحدة)</h3>
+                <table id="body-fiber-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                    <thead class="bg-slate-200"><tr><th class="table-header rounded-tr-lg">العرض</th><th class="table-header">الطول</th><th class="table-header rounded-tl-lg">العدد</th></tr></thead>
+                    <tbody class="divide-y divide-slate-200"></tbody>
+                 </table>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold text-center text-slate-700 mb-3">فيبر الضرف</h3>
+                <table id="door-fiber-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                     <thead class="bg-slate-200"><tr><th class="table-header rounded-tr-lg">العرض</th><th class="table-header">الطول</th><th class="table-header rounded-tl-lg">العدد</th></tr></thead>
+                    <tbody class="divide-y divide-slate-200"></tbody>
+                </table>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold text-center text-slate-700 mb-3">فيبر الأرفف</h3>
+                 <table id="shelf-fiber-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                    <thead class="bg-slate-200"><tr><th class="table-header rounded-tr-lg">العرض</th><th class="table-header">الطول</th><th class="table-header rounded-tl-lg">العدد</th></tr></thead>
+                    <tbody class="divide-y divide-slate-200"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+            <div>
+                <h2 class="text-2xl font-semibold text-center text-blue-800 mb-4">الكلادينج</h2>
+                <div class="overflow-x-auto">
+                    <table id="cladding-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                         <thead class="bg-slate-200"><tr><th class="table-header rounded-tr-lg">العرض</th><th class="table-header">الطول</th><th class="table-header rounded-tl-lg">العدد</th></tr></thead>
+                        <tbody class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-2xl font-semibold text-center text-blue-800 mb-4">الأرفف</h2>
+                <div class="overflow-x-auto">
+                    <table id="shelves-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                       <thead class="bg-slate-200"><tr><th class="table-header rounded-tr-lg">العرض</th><th class="table-header">العمق</th><th class="table-header rounded-tl-lg">العدد</th></tr></thead>
+                         <tbody class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-2xl font-semibold text-center text-blue-800 mb-4">الإكسسوارات</h2>
+                <div class="overflow-x-auto">
+                    <table id="accessories-table" class="min-w-full bg-white border border-slate-300 rounded-lg shadow-sm">
+                       <thead class="bg-slate-200"><tr><th class="table-header rounded-tr-lg">النوع</th><th class="table-header rounded-tl-lg">العدد</th></tr></thead>
+                       <tbody class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rods-page" class="container mx-auto bg-white p-8 rounded-2xl shadow-2xl hidden w-full max-w-4xl">
+        <h1 class="text-3xl font-bold text-center text-slate-800 mb-8 border-b pb-4 border-slate-300">حساب عدد الأعواد</h1>
+        <div class="flex justify-start mb-6">
+            <button id="back-from-rods-btn" class="btn btn-secondary">العودة</button>
+        </div>
+        <div class="space-y-8 text-right">
+            <div>
+                <h2 class="text-2xl font-semibold text-blue-800 mb-3">عدد الأعواد المفردة</h2>
+                 <div id="single-rods-result" class="bg-slate-50 p-4 rounded-lg shadow-sm text-lg text-slate-800 font-mono"></div>
+            </div>
+            <div>
+                <h2 class="text-2xl font-semibold text-blue-800 mb-3">عدد الأعواد المتقاربة (الدوبل)</h2>
+                <div id="double-rods-result" class="bg-slate-50 p-4 rounded-lg shadow-sm text-lg text-slate-800 font-mono"></div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="fixed bottom-0 left-0 right-0 bg-slate-800 text-white text-center py-2 text-sm z-50">
+        تطوير وإبداع: مروان العشماوي
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DOM Elements ---
+        const loginSection = document.getElementById('login-section');
+        const registerSection = document.getElementById('register-section');
+        const mainPage = document.getElementById('main-page');
+        const resultsPage = document.getElementById('results-page');
+        const rodsPage = document.getElementById('rods-page');
+        const welcomeModal = document.getElementById('welcome-modal');
+        const sessionTimeoutModal = document.getElementById('session-timeout-modal');
+        
+        // Forms and Buttons
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const showRegisterBtn = document.getElementById('show-register-btn');
+        const backToLoginBtn = document.getElementById('back-to-login-btn');
+        const startBtn = document.getElementById('start-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const logoutNowBtn = document.getElementById('logout-now-btn');
+        const stayLoggedInBtn = document.getElementById('stay-logged-in-btn');
+        const addRowBtn = document.getElementById('add-row-btn');
+        const resultsBtn = document.getElementById('results-btn');
+        const backBtn = document.getElementById('back-btn');
+        const calculateRodsBtn = document.getElementById('calculate-rods-btn');
+        const backFromRodsBtn = document.getElementById('back-from-rods-btn');
+        const saveResultsBtn = document.getElementById('save-results-btn');
+        const exportFiberCsvBtn = document.getElementById('export-fiber-csv-btn');
+
+        // Messages and Inputs
+        const loginError = document.getElementById('login-error');
+        const registerMessage = document.getElementById('register-message');
+        const welcomeUserMessage = document.getElementById('welcome-user-message');
+        const clientNameInput = document.getElementById('client-name-input');
+        const mainTable = document.getElementById('main-table').querySelector('tbody');
+        const mainError = document.getElementById('main-error');
+        const globalHandleThicknessInput = document.getElementById('global-handle-thickness-input');
+        const subscriptionTimerEl = document.getElementById('subscription-timer');
+
+        // --- Data ---
+        let users = JSON.parse(localStorage.getItem('ka_plus_users')) || [
+             { username: "mrwan tall", password: "123", type: "permanent", expiry: null }
+        ];
+
+        const activationCodes = {
+            "TRIAL1-XF7K-9BM2-4NQJ":    { type: 'trial', duration: 1, unit: 'days' },
+            "PRO6M-7Z2X-9Y8W-1V0U":     { type: 'trial', duration: 6, unit: 'months' },
+            "GOLD1Y-QW3E-4R5T-6Y7U":    { type: 'trial', duration: 1, unit: 'years' },
+            "DIAMOND2Y-M3K5-L7P9-J1H3": { type: 'trial', duration: 30, unit: 'months' },
+            "ULTIMATE-V2X4-B6N8-M0Q1":  { type: 'permanent', duration: null, unit: null }
+        };
+
+        // --- App State ---
+        let cabinetData = [];
+        let inactivityTimer;
+        let warningTimer;
+        let subscriptionCountdownInterval;
+        
+        // --- Session Timeout Settings ---
+        const INACTIVITY_TIMEOUT_MS = 5 * 60 * 1000; 
+        const WARNING_TIMEOUT_MS = 4 * 60 * 1000; 
+
+        // --- Functions ---
+
+        const saveUsers = () => {
+            localStorage.setItem('ka_plus_users', JSON.stringify(users));
+        };
+
+        const showMessage = (element, message, isError = true) => {
+            element.textContent = message;
+            element.className = isError 
+                ? 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative block' 
+                : 'bg-emerald-100 border border-emerald-400 text-emerald-700 px-4 py-3 rounded-lg relative block';
+        };
+
+        const performLogout = () => {
+            mainPage.classList.add('hidden');
+            resultsPage.classList.add('hidden');
+            rodsPage.classList.add('hidden');
+            sessionTimeoutModal.classList.add('hidden');
+            sessionTimeoutModal.classList.remove('flex');
+            
+            loginSection.parentElement.classList.remove('hidden');
+            loginSection.classList.remove('hidden');
+            registerSection.classList.add('hidden');
+            
+            loginForm.reset();
+            mainTable.innerHTML = '';
+            clientNameInput.value = '';
+            globalHandleThicknessInput.value = '0';
+            
+            clearAllTimers();
+            window.removeEventListener('mousemove', resetInactivityTimers);
+            window.removeEventListener('keypress', resetInactivityTimers);
+            window.removeEventListener('click', resetInactivityTimers);
+            
+            showMessage(loginError, 'تم تسجيل خروجك بنجاح.');
+        };
+
+        const updateSubscriptionTimer = (expiryDate) => {
+            const now = new Date().getTime();
+            const distance = new Date(expiryDate).getTime() - now;
+
+            if (distance < 0) {
+                clearInterval(subscriptionCountdownInterval);
+                subscriptionTimerEl.innerHTML = "انتهت صلاحية اشتراكك!";
+                // Force logout if subscription expires while logged in
+                setTimeout(performLogout, 3000); 
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            subscriptionTimerEl.innerHTML = `الوقت المتبقي: ${days} ي, ${hours} س, ${minutes} د, ${seconds} ث`;
+        };
+        
+        const startSubscriptionTimer = (user) => {
+            if (user.type === 'trial' && user.expiry) {
+                subscriptionTimerEl.classList.remove('hidden');
+                updateSubscriptionTimer(user.expiry); // Initial call
+                subscriptionCountdownInterval = setInterval(() => {
+                    updateSubscriptionTimer(user.expiry);
+                }, 1000);
+            } else {
+                subscriptionTimerEl.classList.add('hidden');
+            }
+        };
+        
+        const showTimeoutWarning = () => {
+            sessionTimeoutModal.classList.remove('hidden');
+            sessionTimeoutModal.classList.add('flex');
+        };
+
+        const clearAllTimers = () => {
+            clearTimeout(inactivityTimer);
+            clearTimeout(warningTimer);
+            clearInterval(subscriptionCountdownInterval);
+            subscriptionTimerEl.classList.add('hidden');
+        };
+
+        const resetInactivityTimers = () => {
+            clearTimeout(inactivityTimer);
+            clearTimeout(warningTimer);
+            warningTimer = setTimeout(showTimeoutWarning, WARNING_TIMEOUT_MS);
+            inactivityTimer = setTimeout(performLogout, INACTIVITY_TIMEOUT_MS);
+        };
+
+        // --- Event Listeners ---
+
+        showRegisterBtn.addEventListener('click', () => {
+            loginSection.classList.add('hidden');
+            registerSection.classList.remove('hidden');
+            loginError.classList.add('hidden');
+        });
+
+        backToLoginBtn.addEventListener('click', () => {
+            registerSection.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+            registerMessage.classList.add('hidden');
+        });
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newUsername = document.getElementById('new-username').value.trim().toLowerCase();
+            const newPassword = document.getElementById('new-password').value;
+            const code = document.getElementById('activation-code').value.trim().toUpperCase();
+
+            if (!newUsername || !newPassword || !code) {
+                showMessage(registerMessage, 'يرجى ملء جميع الحقول.');
+                return;
+            }
+            if (users.some(u => u.username === newUsername)) {
+                showMessage(registerMessage, 'اسم المستخدم هذا موجود بالفعل. الرجاء اختيار اسم آخر.');
+                return;
+            }
+            const packageInfo = activationCodes[code];
+            if (!packageInfo) {
+                showMessage(registerMessage, 'كود التفعيل غير صحيح.');
+                return;
+            }
+
+            let expiryDate = null;
+            if (packageInfo.type === 'trial') {
+                expiryDate = new Date();
+                if (packageInfo.unit === 'days') expiryDate.setDate(expiryDate.getDate() + packageInfo.duration);
+                if (packageInfo.unit === 'months') expiryDate.setMonth(expiryDate.getMonth() + packageInfo.duration);
+                if (packageInfo.unit === 'years') expiryDate.setFullYear(expiryDate.getFullYear() + packageInfo.duration);
+            }
+
+            const newUser = {
+                username: newUsername,
+                password: newPassword,
+                type: packageInfo.type,
+                expiry: expiryDate ? expiryDate.toISOString() : null
+            };
+            users.push(newUser);
+            saveUsers();
+            showMessage(registerMessage, 'تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.', false);
+            registerForm.reset();
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim().toLowerCase();
+            const password = document.getElementById('password').value;
+            const user = users.find(u => u.username === username && u.password === password);
+
+             if (user) {
+                if(user.type === 'trial' && new Date() > new Date(user.expiry)) {
+                    showMessage(loginError, 'انتهت صلاحية اشتراكك. يرجى التواصل للتجديد.');
+                    return;
+                }
+                
+                loginError.classList.add('hidden');
+                loginSection.parentElement.classList.add('hidden');
+                welcomeUserMessage.textContent = `مرحباً بك ${user.username}`;
+                welcomeModal.classList.remove('hidden');
+                welcomeModal.classList.add('flex');
+                
+                startSubscriptionTimer(user);
+                resetInactivityTimers();
+                window.addEventListener('mousemove', resetInactivityTimers);
+                window.addEventListener('keypress', resetInactivityTimers);
+                window.addEventListener('click', resetInactivityTimers);
+
+            } else {
+                showMessage(loginError, 'اسم المستخدم أو كلمة المرور غير صحيحة.');
+            }
+        });
+
+        startBtn.addEventListener('click', () => {
+            welcomeModal.classList.add('hidden');
+            welcomeModal.classList.remove('flex');
+            mainPage.classList.remove('hidden');
+            if (mainTable.rows.length === 0) {
+                addRow();
+            }
+        });
+
+        logoutBtn.addEventListener('click', performLogout);
+        logoutNowBtn.addEventListener('click', performLogout);
+
+        stayLoggedInBtn.addEventListener('click', () => {
+            sessionTimeoutModal.classList.add('hidden');
+            sessionTimeoutModal.classList.remove('flex');
+            resetInactivityTimers();
+        });
+
+        const addRow = () => {
+            const newRow = mainTable.insertRow();
+            newRow.innerHTML = `
+                <td><input type="number" class="styled-input width" min="0"></td>
+                <td><input type="number" class="styled-input depth" min="0"></td>
+                <td><input type="number" class="styled-input height" min="0"></td>
+                <td>
+                    <select class="type styled-select">
+                        <option value="علوي">علوي</option>
+                        <option value="سفلي">سفلي</option>
+                        <option value="رشاقه">رشاقه</option>
+                        <option value="دولاب">دولاب</option>
+                        <option value="متداخل">متداخل</option>
+                        <option value="ادراج">ادراج</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="door-type styled-select">
+                        <option value="بدون ضرفه">بدون ضرفه</option>
+                        <option value="قلاب">قلاب</option>
+                        <option value="ضرفه">ضرفه</option>
+                        <option value="ضرفتين">ضرفتين</option>
+                        <option value="ضرفه زجاج">ضرفه زجاج</option>
+                        <option value="ضرفتين زجاج">ضرفتين زجاج</option>
+                    </select>
+                 </td>
+                <td><input type="number" class="styled-input shelves" min="0" value="0"></td>
+                <td><input type="text" class="styled-input panoh-shape" placeholder="مثال: حفر ليزر..."></td>
+                <td><button class="delete-row-btn btn btn-danger !py-2 !px-3">حذف</button></td>
+            `;
+            newRow.querySelector('.delete-row-btn').addEventListener('click', () => newRow.remove());
+        };
+        addRowBtn.addEventListener('click', addRow);
+
+        resultsBtn.addEventListener('click', () => {
+            if (collectAndValidateData()) {
+                calculateResults();
+                mainPage.classList.add('hidden');
+                resultsPage.classList.remove('hidden');
+            }
+        });
+
+        calculateRodsBtn.addEventListener('click', () => {
+             if (collectAndValidateData()) {
+                calculateRods();
+                mainPage.classList.add('hidden');
+                rodsPage.classList.remove('hidden');
+            }
+        });
+
+        backBtn.addEventListener('click', () => {
+            resultsPage.classList.add('hidden');
+            mainPage.classList.remove('hidden');
+        });
+
+        backFromRodsBtn.addEventListener('click', () => {
+            rodsPage.classList.add('hidden');
+            mainPage.classList.remove('hidden');
+        });
+
+        const collectAndValidateData = () => {
+            cabinetData = [];
+            const rows = mainTable.rows;
+            let hasError = false;
+            const handleThickness = parseInt(globalHandleThicknessInput.value) || 0;
+
+            for (const row of rows) {
+                const widthInput = row.querySelector('.width');
+                const depthInput = row.querySelector('.depth');
+                const heightInput = row.querySelector('.height');
+                
+                [widthInput, depthInput, heightInput].forEach(inp => inp.style.borderColor = '#cbd5e1');
+
+                const width = parseInt(widthInput.value);
+                const depth = parseInt(depthInput.value);
+                const height = parseInt(heightInput.value);
+                
+                if (isNaN(width) || isNaN(depth) || isNaN(height) || width <= 0 || depth <= 0 || height <= 0) {
+                    hasError = true;
+                     if(isNaN(width) || width <= 0) widthInput.style.borderColor = 'red';
+                     if(isNaN(depth) || depth <= 0) depthInput.style.borderColor = 'red';
+                     if(isNaN(height) || height <= 0) heightInput.style.borderColor = 'red';
+                }
+                
+                cabinetData.push({
+                    width, depth, height, handleThickness,
+                    type: row.querySelector('.type').value,
+                    doorType: row.querySelector('.door-type').value,
+                    shelves: parseInt(row.querySelector('.shelves').value) || 0,
+                    panohShape: row.querySelector('.panoh-shape').value || 'لا يوجد'
+                });
+            }
+
+            if (hasError || cabinetData.length === 0) {
+                mainError.textContent = 'يوجد حقول فارغة أو غير صحيحة. يرجى تعبئة جميع الحقول بأرقام موجبة.';
+                mainError.classList.remove('hidden');
+                return false;
+            }
+            mainError.classList.add('hidden');
+            return true;
+        };
+
+        const addOrUpdate = (dataObject, key, values, countField = 'count') => {
+            if (!dataObject[key]) {
+                dataObject[key] = { ...values, [countField]: 0 };
+            }
+            dataObject[key][countField] += values[countField];
+        };
+
+        function calculateResults() {
+            const aluminumData = {}, doorsData = {}, shelvesData = {}, claddingData = {},
+                  accessoriesData = {
+                      'عظمة ثلاثي (للبانوهات)': { type: 'عظمة ثلاثي (للبانوهات)', count: 0 },
+                      'عظمة دوبل (للضرف)': { type: 'عظمة دوبل (للضرف)', count: 0 },
+                      'عظمة دفن (للأرفف)': { type: 'عظمة دفن (للأرفف)', count: 0 }
+                  },
+                  bodyFiberData = {}, doorFiberData = {}, shelfFiberData = {};
+            
+            let totalDoors = 0, totalShelves = 0;
+
+            cabinetData.forEach(cab => {
+                const { width, depth, height, type, doorType, handleThickness, shelves, panohShape } = cab;
+                accessoriesData['عظمة ثلاثي (للبانوهات)'].count += 8;
+
+                if (shelves > 0) {
+                    totalShelves += shelves;
+                    const shelfWidth = width - 50, shelfDepth = depth - 25;
+                    addOrUpdate(shelvesData, `${shelfWidth}x${shelfDepth}`, { width: shelfWidth, depth: shelfDepth, count: shelves });
+                    const shelfFiberWidth = width - 100, shelfFiberDepth = depth - 75;
+                    addOrUpdate(shelfFiberData, `${shelfFiberWidth}x${shelfFiberDepth}`, { width: shelfFiberWidth, height: shelfFiberDepth, count: shelves });
+                }
+                
+                if (doorType !== 'بدون ضرفه') {
+                    let doorWidth = width - 25, doorHeight = 0, doorCount = doorType.includes('ضرفتين') ? 2 : 1;
+                    totalDoors += doorCount;
+                    
+                    if (type === 'علوي' || type === 'رشاقه') doorHeight = height - 25 - handleThickness;
+                    else if (type === 'سفلي' || type === 'دولاب') doorHeight = height - 105 - handleThickness;
+                    if (doorCount === 2) doorWidth = Math.floor((doorWidth - 5) / 2);
+                    if(doorHeight > 0 && doorWidth > 0) addOrUpdate(doorsData, `${doorWidth}x${doorHeight}`, { width: doorWidth, height: doorHeight, count: doorCount, notes: panohShape });
+                    
+                    if (!doorType.includes('زجاج')) {
+                         if(doorHeight > 0 && doorWidth > 0) addOrUpdate(claddingData, `${doorWidth}x${doorHeight}`, { width: doorWidth, height: doorHeight, count: doorCount });
+                        let fiberDoorWidth = 0, fiberDoorHeight = 0;
+                        if (type === 'علوي' || type === 'رشاقه') {
+                             fiberDoorWidth = width - 90; fiberDoorHeight = height - 90 - handleThickness;
+                        } else if (type === 'سفلي' || type === 'دولاب') {
+                             fiberDoorWidth = width - 90; fiberDoorHeight = height - 170 - handleThickness;
+                        }
+                        if (doorCount === 2) fiberDoorWidth = Math.floor((fiberDoorWidth - 5) / 2);
+                        if(fiberDoorHeight > 0 && fiberDoorWidth > 0) addOrUpdate(doorFiberData, `${fiberDoorWidth}x${fiberDoorHeight}`, { width: fiberDoorWidth, height: fiberDoorHeight, count: doorCount });
+                    }
+                }
+                
+                const addAluminum = (key, s, d) => {
+                     if (!aluminumData[key]) aluminumData[key] = { single: 0, double: 0 };
+                     aluminumData[key].single += s; aluminumData[key].double += d;
+                };
+
+                if (type === 'علوي' || type === 'رشاقه') {
+                    addAluminum(`العرض-${width-50}`, 2, 2); addAluminum(`الطول-${height-50}`, 2, 2); addAluminum(`العمق-${depth-50}`, 0, 4);
+                    addOrUpdate(bodyFiberData, `${width-50}x${height-50}`, { width: width-50, height: height-50, count: 1 });
+                    addOrUpdate(bodyFiberData, `${width-50}x${depth-50}`, { width: width-50, height: depth-50, count: 2 });
+                    addOrUpdate(bodyFiberData, `${height-50}x${depth-50}`, { width: height-50, height: depth-50, count: 2 });
+                } else if (type === 'سفلي' || type === 'ادراج') {
+                    addAluminum(`العرض-${width-50}`, 3, 1); addAluminum(`الطول-${height-130}`, 2, 2); addAluminum(`العمق-${depth-50}`, 2, 2);
+                    addOrUpdate(bodyFiberData, `${width-50}x${height-130}`, { width: width-50, height: height-130, count: 1 });
+                    addOrUpdate(bodyFiberData, `${width-50}x${depth-50}`, { width: width-50, height: depth-50, count: 1 });
+                    addOrUpdate(bodyFiberData, `${height-130}x${depth-50}`, { width: height-130, height: depth-50, count: 2 });
+                } else if (type === 'دولاب') {
+                    addAluminum(`العرض-${width-50}`, 2, 2); addAluminum(`الطول-${height-130}`, 2, 2); addAluminum(`العمق-${depth-50}`, 0, 4);
+                    addOrUpdate(bodyFiberData, `${width-50}x${height-130}`, { width: width-50, height: height-130, count: 1 });
+                    addOrUpdate(bodyFiberData, `${width-50}x${depth-50}`, { width: width-50, height: depth-50, count: 2 });
+                    addOrUpdate(bodyFiberData, `${height-130}x${depth-50}`, { width: height-130, height: depth-50, count: 2 });
+                }
+
+                if (type === 'ادراج') {
+                    const drawerWidth = width - 25;
+                    addOrUpdate(doorsData, `${drawerWidth}x175`, { width: drawerWidth, height: 175, count: 2, notes: 'درج' });
+                    addOrUpdate(claddingData, `${drawerWidth}x175`, { width: drawerWidth, height: 175, count: 2 });
+                    addOrUpdate(doorsData, `${drawerWidth}x440`, { width: drawerWidth, height: 440, count: 1, notes: 'ضرفة سفلية' });
+                    addOrUpdate(claddingData, `${drawerWidth}x440`, { width: drawerWidth, height: 440, count: 1 });
+                    totalDoors += 3;
+                }
+            });
+            
+            accessoriesData['عظمة دوبل (للضرف)'].count = totalDoors * 4;
+            accessoriesData['عظمة دفن (للأرفف)'].count = totalShelves * 4;
+            displayResults(aluminumData, doorsData, shelvesData, claddingData, bodyFiberData, doorFiberData, shelfFiberData, accessoriesData);
+        }
+
+        function displayResults(aluminum, doors, shelves, cladding, bodyFiber, doorFiber, shelfFiber, accessories) {
+            document.getElementById('results-title').textContent = `نتائج مشروع: ${clientNameInput.value || 'بدون اسم'}`;
+            const renderTable = (data, tableId, columns) => {
+                const tableBody = document.getElementById(tableId).querySelector('tbody');
+                tableBody.innerHTML = '';
+                const sortedKeys = tableId === 'aluminum-table' ?
+                    Object.keys(data).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1])) :
+                    Object.keys(data);
+                sortedKeys.forEach(key => {
+                    const item = data[key];
+                    const row = tableBody.insertRow();
+                    columns.forEach(col => {
+                       const cell = row.insertCell();
+                       cell.textContent = (tableId === 'aluminum-table' && col === 'size') ? key.split('-')[1] : item[col];
+                       cell.classList.add('text-center', 'py-3', 'px-2');
+                    });
+                });
+            };
+            renderTable(aluminum, 'aluminum-table', ['size', 'single', 'double']);
+            renderTable(doors, 'doors-table', ['width', 'height', 'count', 'notes']);
+            renderTable(shelves, 'shelves-table', ['width', 'depth', 'count']);
+            renderTable(cladding, 'cladding-table', ['width', 'height', 'count']);
+            renderTable(bodyFiber, 'body-fiber-table', ['width', 'height', 'count']);
+            renderTable(doorFiber, 'door-fiber-table', ['width', 'height', 'count']);
+            renderTable(shelfFiber, 'shelf-fiber-table', ['width', 'height', 'count']);
+            renderTable(accessories, 'accessories-table', ['type', 'count']);
+        }
+
+        function calculateRods() {
+            let totalSingleLength = 0, totalDoubleLength = 0;
+            cabinetData.forEach(cab => {
+                const { width, depth, height, type, doorType, shelves, handleThickness } = cab;
+                if (type === 'علوي' || type === 'رشاقه') {
+                    totalSingleLength += (width - 50) * 2; totalDoubleLength += (width - 50) * 2;
+                    totalSingleLength += (height - 50) * 2; totalDoubleLength += (height - 50) * 2;
+                    totalDoubleLength += (depth - 50) * 4;
+                } else if (type === 'سفلي' || type === 'ادراج') {
+                    totalSingleLength += (width - 50) * 3; totalDoubleLength += (width - 50) * 1;
+                    totalSingleLength += (height - 130) * 2; totalDoubleLength += (height - 130) * 2;
+                    totalSingleLength += (depth - 50) * 2; totalDoubleLength += (depth - 50) * 2;
+                } else if (type === 'دولاب') {
+                    totalSingleLength += (width - 50) * 2; totalDoubleLength += (width - 50) * 2;
+                    totalSingleLength += (height - 130) * 2; totalDoubleLength += (height - 130) * 2;
+                    totalDoubleLength += (depth - 50) * 4;
+                }
+                if (shelves > 0) totalSingleLength += ((width - 50) * 2 + (depth - 25) * 2) * shelves;
+                if (doorType !== 'بدون ضرفه') {
+                    let doorCount = doorType.includes('ضرفتين') ? 2 : 1, doorWidth = width - 25, doorHeight = 0;
+                    if (type === 'علوي' || type === 'رشاقه') doorHeight = height - 25 - handleThickness;
+                    else if (type === 'سفلي' || type === 'دولاب') doorHeight = height - 105 - handleThickness;
+                    if (doorCount === 2) doorWidth = Math.floor((doorWidth - 5) / 2);
+                    if (doorHeight > 0 && doorWidth > 0) totalDoubleLength += (doorWidth * 2 + doorHeight * 2) * doorCount;
+                }
+            });
+            const singleRodsCount = Math.ceil(totalSingleLength / 6000), doubleRodsCount = Math.ceil(totalDoubleLength / 6000);
+            document.getElementById('single-rods-result').innerHTML = `<p>إجمالي الطول: <span class="font-bold">${totalSingleLength.toLocaleString()}</span> مم</p><p class="mt-2">العدد المطلوب: <span class="text-emerald-600 font-bold text-xl">${singleRodsCount}</span> عود</p>`;
+            document.getElementById('double-rods-result').innerHTML = `<p>إجمالي الطول: <span class="font-bold">${totalDoubleLength.toLocaleString()}</span> مم</p><p class="mt-2">العدد المطلوب: <span class="text-emerald-600 font-bold text-xl">${doubleRodsCount}</span> عود</p>`;
+        }
+        
+        const generateCsvContent = () => {
+             let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+             csvContent += "النوع,العرض,الطول,العدد\r\n";
+             const parseAndAdd = (tableId, typeName) => {
+                const rows = document.getElementById(tableId).tBodies[0].rows;
+                for (const row of rows) {
+                    const cells = row.cells;
+                    csvContent += `${typeName},${cells[0].innerText},${cells[1].innerText},${cells[2].innerText}\r\n`;
+                }
+             };
+             parseAndAdd('body-fiber-table', "فيبر بانوهات");
+             parseAndAdd('door-fiber-table', "فيبر ضرف");
+             parseAndAdd('shelf-fiber-table', "فيبر أرفف");
+             return csvContent;
+        };
+
+        exportFiberCsvBtn.addEventListener('click', () => {
+            const encodedUri = encodeURI(generateCsvContent());
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            const clientName = clientNameInput.value.trim().replace(/ /g, '_') || 'بدون_اسم';
+            const date = new Date().toISOString().split('T')[0];
+            link.setAttribute("download", `تقرير_الفيبر_${clientName}_${date}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        saveResultsBtn.addEventListener('click', () => {
+            const clientName = clientNameInput.value || 'بدون اسم';
+            const date = new Date().toLocaleString('ar-EG');
+            const tablesHTML = {
+                aluminum: document.getElementById('aluminum-table').outerHTML,
+                doors: document.getElementById('doors-table').outerHTML,
+                bodyFiber: document.getElementById('body-fiber-table').outerHTML,
+                doorFiber: document.getElementById('door-fiber-table').outerHTML,
+                shelfFiber: document.getElementById('shelf-fiber-table').outerHTML,
+                cladding: document.getElementById('cladding-table').outerHTML,
+                shelves: document.getElementById('shelves-table').outerHTML,
+                accessories: document.getElementById('accessories-table').outerHTML
+            };
+            const safeClientName = clientName.replace(/[^a-z0-9\u0600-\u06FF]/ig, '_');
+            let htmlContent = `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>نتائج مطبخ: ${clientName}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',Arial,sans-serif;margin:20px;color:#1e293b;direction:rtl;background-color:#f8fafc}h1,h2,h3{color:#1e3a8a;text-align:center;margin-bottom:1rem}h1{font-size:2rem}h2{font-size:1.6rem;margin-top:2.5rem;border-bottom:2px solid #60a5fa;padding-bottom:.5rem}h3{font-size:1.3rem;color:#1e293b;text-align:right;margin-top:1.5rem;margin-bottom:.8rem}table{width:100%;border-collapse:collapse;margin-bottom:20px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);border-radius:.5rem;overflow:hidden}th,td{border:1px solid #e2e8f0;padding:12px;text-align:center}th{background-color:#334155;color:#fff;font-weight:700}tbody tr:nth-child(even){background-color:#f1f5f9}tbody tr:hover{background-color:#e2e8f0}.header{text-align:center;margin-bottom:2rem;padding:1rem;background-color:#e0f2fe;border-radius:.5rem}.footer{text-align:center;color:#64748b;font-size:.875rem;margin-top:3rem;border-top:1px solid #cbd5e1;padding-top:1rem}.grid-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2rem}.section{break-inside:avoid;background:#fff;padding:1rem;border-radius:.5rem;box-shadow:0 1px 3px 0 rgba(0,0,0,.1)}@media print{body{margin:0;background-color:#fff}.grid-container,.section,.header{box-shadow:none;border:1px solid #ccc}}</style></head><body><div class="header"><h1>Kitchen Aluminum Plus+</h1><h2>تقرير حسابات مشروع: ${clientName}</h2><p>تاريخ الإصدار: ${date}</p></div><div class="grid-container"><div class="section"><h2>مقاسات الألمونيوم</h2>${tablesHTML.aluminum}</div><div class="section"><h2>الضرف</h2>${tablesHTML.doors}</div></div><h2>تفاصيل الفيبر</h2><div class="grid-container" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))"><div class="section"><h3>فيبر البانوهات</h3>${tablesHTML.bodyFiber}</div><div class="section"><h3>فيبر الضرف</h3>${tablesHTML.doorFiber}</div><div class="section"><h3>فيبر الأرفف</h3>${tablesHTML.shelfFiber}</div></div><div class="grid-container" style="grid-template-columns:repeat(auto-fit,minmax(350px,1fr))"><div class="section"><h2>الكلادينج</h2>${tablesHTML.cladding}</div><div class="section"><h2>الأرفف</h2>${tablesHTML.shelves}</div><div class="section"><h2>الإكسسوارات</h2>${tablesHTML.accessories}</div></div><div class="footer"><p>تم إنشاؤه بواسطة برنامج Kitchen Aluminum Plus+</p><p>تطوير: مروان العشماوي</p></div></body></html>`;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `نتائج_${safeClientName}_${new Date().toISOString().split('T')[0]}.html`;
+            document.body.appendChild(a);
+            a.click();
+            URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        });
+
+        mainTable.addEventListener('keydown', (e) => {
+            const activeEl = document.activeElement;
+            if (activeEl.tagName !== 'INPUT' && activeEl.tagName !== 'SELECT') return;
+            const currentCell = activeEl.closest('td');
+            if (!currentCell) return;
+            const currentRow = currentCell.parentElement;
+            const cellIndex = currentCell.cellIndex;
+            const rowIndex = currentRow.rowIndex - 1;
+            let nextEl = null;
+            switch (e.key) {
+                case 'ArrowUp': if (rowIndex > 0) nextEl = mainTable.rows[rowIndex - 1].cells[cellIndex].querySelector('input, select'); break;
+                case 'ArrowDown': if (rowIndex < mainTable.rows.length - 1) nextEl = mainTable.rows[rowIndex + 1].cells[cellIndex].querySelector('input, select'); break;
+                case 'ArrowLeft': if (cellIndex > 0) nextEl = currentRow.cells[cellIndex - 1].querySelector('input, select'); break;
+                case 'ArrowRight': if (cellIndex < currentRow.cells.length - 2) nextEl = currentRow.cells[cellIndex + 1].querySelector('input, select'); break;
+            }
+            if (nextEl) {
+                e.preventDefault();
+                nextEl.focus();
+                if (nextEl.select) nextEl.select();
+            }
+        });
+    });
+    </script>
+</body>
+</html>
